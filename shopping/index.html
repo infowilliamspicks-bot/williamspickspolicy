@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Williams Picks｜訂購資訊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1c1a;
+    --ink-soft:#4a4a46;
+    --paper:#faf9f6;
+    --paper-dim:#f1efe9;
+    --jade:#2f4a3f;
+    --jade-deep:#1e332b;
+    --gold:#b8923f;
+    --line:rgba(28,28,26,0.10);
+    --radius: 2px;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#f1efe9;
+      --ink-soft:#c9c7bf;
+      --paper:#15150f;
+      --paper-dim:#1c1c15;
+      --jade:#7fae9a;
+      --jade-deep:#a9cebd;
+      --gold:#d9b45f;
+      --line:rgba(241,239,233,0.12);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#f1efe9;
+    --ink-soft:#c9c7bf;
+    --paper:#15150f;
+    --paper-dim:#1c1c15;
+    --jade:#7fae9a;
+    --jade-deep:#a9cebd;
+    --gold:#d9b45f;
+    --line:rgba(241,239,233,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top, 0px);}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans TC", "PingFang TC", sans-serif;
+    font-weight:400;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:"Noto Serif TC", serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    top: env(safe-area-inset-top, 0px);
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px clamp(20px,5vw,64px);
+    padding-top: calc(14px + env(safe-area-inset-top, 0px));
+    background:color-mix(in srgb, var(--paper) 82%, transparent);
+    backdrop-filter:blur(14px) saturate(160%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:30px;width:auto;display:block;}
+  .brand span{font-family:"Noto Serif TC",serif;font-size:16px;font-weight:600;letter-spacing:0.04em;}
+  nav.links{display:flex;gap:clamp(14px,2.4vw,32px);font-size:13.5px;color:var(--ink-soft);}
+  nav.links a{text-decoration:none;position:relative;padding:4px 0;transition:color .25s ease;}
+  nav.links a:hover{color:var(--ink);}
+  nav.links a::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;
+    background:var(--gold);transform:scaleX(0);transform-origin:right;
+    transition:transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  nav.links a:hover::after{transform:scaleX(1);transform-origin:left;}
+  @media (max-width:640px){ nav.links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:min(88vh, 720px);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px 60px;
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;
+    inset:-20% -10% auto -10%;
+    height:70%;
+    background:radial-gradient(60% 60% at 50% 20%, color-mix(in srgb, var(--jade) 20%, transparent), transparent 70%);
+    pointer-events:none;
+    filter:blur(10px);
+    opacity:0;
+    animation:glowIn 1.6s ease forwards .15s;
+  }
+  @keyframes glowIn{to{opacity:1;}}
+
+  .hero-mark{
+    height:64px;
+    width:auto;
+    margin-bottom:28px;
+    opacity:0;
+    transform:translateY(14px) scale(.94);
+    animation:markIn 1s cubic-bezier(.16,1,.3,1) forwards .2s;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.06));
+  }
+  @keyframes markIn{to{opacity:1;transform:translateY(0) scale(1);}}
+
+  .hero-eyebrow{
+    font-size:12.5px;
+    letter-spacing:0.28em;
+    color:var(--gold);
+    margin-bottom:18px;
+    opacity:0;
+    animation:fadeUp .8s cubic-bezier(.16,1,.3,1) forwards .45s;
+  }
+  .hero h1{
+    font-size:clamp(30px,5.6vw,54px);
+    line-height:1.35;
+    max-width:15ch;
+    opacity:0;
+    animation:fadeUp .9s cubic-bezier(.16,1,.3,1) forwards .55s;
+  }
+  .hero p.sub{
+    margin-top:20px;
+    max-width:46ch;
+    color:var(--ink-soft);
+    font-size:clamp(14.5px,1.6vw,17px);
+    opacity:0;
+    animation:fadeUp .9s cubic-bezier(.16,1,.3,1) forwards .75s;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+  .hero-cta{
+    display:flex;
+    gap:14px;
+    margin-top:34px;
+    flex-wrap:wrap;
+    justify-content:center;
+    opacity:0;
+    animation:fadeUp .9s cubic-bezier(.16,1,.3,1) forwards .95s;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    font-size:14px;
+    text-decoration:none;
+    border-radius:999px;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1), background .3s ease, box-shadow .3s ease;
+  }
+  .btn-primary{background:var(--jade);color:#faf9f6;box-shadow:0 6px 18px -6px color-mix(in srgb, var(--jade) 70%, transparent);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px color-mix(in srgb, var(--jade) 80%, transparent);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{transform:translateY(-2px); border-color:var(--gold);}
+
+  /* ---------- section shell ---------- */
+  section{
+    padding:80px clamp(20px,6vw,80px);
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:42px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px;
+  }
+  .section-head h2{font-size:clamp(22px,3vw,30px);}
+  .section-num{font-family:"Noto Serif TC",serif; font-size:13px; color:var(--ink-soft); letter-spacing:0.08em;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- 訂購方式 ---------- */
+  .order-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:680px){ .order-grid{grid-template-columns:1fr;} }
+  .order-card{
+    background:var(--paper);
+    padding:32px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    transition:background .35s ease;
+  }
+  .order-card:hover{background:var(--paper-dim);}
+  .order-step{font-family:"Noto Serif TC",serif; font-size:13px; color:var(--gold); letter-spacing:0.08em;}
+  .order-card h3{font-size:19px;}
+  .order-card p{color:var(--ink-soft); font-size:14.5px; margin:0;}
+  .order-link{
+    margin-top:auto;
+    align-self:flex-start;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:14px;
+    color:var(--jade-deep);
+    text-decoration:none;
+    padding-bottom:2px;
+    border-bottom:1px solid currentColor;
+    transition:gap .3s ease, opacity .3s ease;
+  }
+  .order-link:hover{gap:10px;}
+  .order-link svg{width:13px;height:13px;transition:transform .3s ease;}
+  .order-link:hover svg{transform:translateX(2px);}
+
+  /* ---------- 付款方式 ---------- */
+  .pay-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  @media (max-width:680px){ .pay-row{grid-template-columns:1fr;} }
+  .pay-card{
+    border:1px solid var(--line);
+    padding:28px 22px;
+    text-align:center;
+    position:relative;
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .pay-card:hover{border-color:var(--gold); transform:translateY(-3px);}
+  .pay-icon{
+    width:40px;height:40px;margin:0 auto 16px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--jade);
+  }
+  .pay-icon svg{width:100%;height:100%;}
+  .pay-card h3{font-size:16px;margin-bottom:6px;}
+  .pay-card p{font-size:13px;color:var(--ink-soft);margin:0;}
+
+  /* ---------- 出貨資訊 timeline ---------- */
+  .ship-line{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .ship-item{
+    display:grid;
+    grid-template-columns:120px 20px 1fr;
+    gap:18px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .ship-item:last-child{border-bottom:none;}
+  .ship-time{font-family:"Noto Serif TC",serif; font-size:15px; color:var(--gold); white-space:nowrap;}
+  .ship-dot-wrap{display:flex;justify-content:center;}
+  .ship-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--jade);
+    margin-top:6px;
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--jade) 18%, transparent);
+  }
+  .ship-body h3{font-size:16px;margin-bottom:4px;}
+  .ship-body p{margin:0;color:var(--ink-soft);font-size:14.5px;}
+
+  /* ---------- 售後服務 ---------- */
+  .after-card{
+    border:1px solid var(--line);
+    padding:36px clamp(24px,4vw,44px);
+    background:linear-gradient(160deg, color-mix(in srgb, var(--jade) 6%, var(--paper)), var(--paper));
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .after-card p{color:var(--ink-soft); margin:0; max-width:60ch;}
+  .after-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    align-self:flex-start;
+    padding:12px 22px;
+    border-radius:999px;
+    border:1px solid var(--jade);
+    color:var(--jade-deep);
+    text-decoration:none;
+    font-size:14px;
+    transition:background .3s ease, color .3s ease;
+  }
+  .after-link:hover{background:var(--jade); color:#faf9f6;}
+
+  /* ---------- 聯繫方式 ---------- */
+  .contact-block{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .contact-block a.mail{
+    font-family:"Noto Serif TC",serif;
+    font-size:clamp(18px,2.6vw,24px);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:4px;
+    transition:border-color .3s ease, color .3s ease;
+  }
+  .contact-block a.mail:hover{border-color:var(--gold); color:var(--gold);}
+
+  footer{
+    text-align:center;
+    padding:40px 20px calc(40px + env(safe-area-inset-bottom, 0px));
+    color:var(--ink-soft);
+    font-size:12.5px;
+    border-top:1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <img class="hero-mark" src="https://res.cloudinary.com/dxo2zxqt7/image/upload/v1788091322/%E5%8F%B0%E4%B8%AD%E5%B8%82%E9%9B%85%E9%9F%BB%E8%97%9D%E6%96%87%E5%8D%94%E6%9C%83-7_bji1xq.png" alt="Williams Picks Logo">
+  <div class="hero-eyebrow">訂購 · 付款 · 出貨 一次說明</div>
+  <h1>簡單三步驟，把喜歡的選品帶回家</h1>
+  <p class="sub">不論是官網下單還是 LINE 私訊，我們都以最快速度為您安排出貨，並提供多元付款方式。</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="http://WilliamsPicks.com" target="_blank" rel="noopener">前往官網訂購</a>
+    <a class="btn btn-ghost" href="https://lin.ee/PvObt9N" target="_blank" rel="noopener">加入 LINE@ 官方帳號</a>
+  </div>
+</div>
+
+<section id="order">
+  <div class="section-head reveal">
+    <h2>訂購方式</h2>
+    <span class="section-num">01</span>
+  </div>
+  <div class="order-grid reveal">
+    <div class="order-card">
+      <span class="order-step">方式一</span>
+      <h3>官網訂購</h3>
+      <p>透過 WilliamsPicks.com 官方網站瀏覽品項並直接下單，流程簡單、24 小時開放。</p>
+      <a class="order-link" href="http://WilliamsPicks.com" target="_blank" rel="noopener">
+        前往 WilliamsPicks.com
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="order-card">
+      <span class="order-step">方式二</span>
+      <h3>LINE@ 官方帳號</h3>
+      <p>加入官方 LINE 帳號，由專人協助確認品項與訂單細節，適合有客製化需求的顧客。</p>
+      <a class="order-link" href="https://lin.ee/PvObt9N" target="_blank" rel="noopener">
+        加入 LINE@ 好友
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="pay">
+  <div class="section-head reveal">
+    <h2>付款方式</h2>
+    <span class="section-num">02</span>
+  </div>
+  <div class="pay-row reveal">
+    <div class="pay-card">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7"/></svg>
+      </div>
+      <h3>貨到付款</h3>
+      <p>收到商品時再付款，安心又方便。</p>
+    </div>
+    <div class="pay-card">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 9.5h19"/><path d="M6 14.5h4"/></svg>
+      </div>
+      <h3>台灣發行信用卡</h3>
+      <p>支援台灣各家發卡銀行信用卡付款。</p>
+    </div>
+    <div class="pay-card">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/><circle cx="12" cy="18.3" r="0.3" fill="currentColor"/></svg>
+      </div>
+      <h3>ATM 轉帳</h3>
+      <p>提供銀行帳號，完成後告知後五碼即可。</p>
+    </div>
+  </div>
+</section>
+
+<section id="ship">
+  <div class="section-head reveal">
+    <h2>出貨資訊</h2>
+    <span class="section-num">03</span>
+  </div>
+  <div class="ship-line reveal">
+    <div class="ship-item">
+      <span class="ship-time">24 小時內</span>
+      <span class="ship-dot-wrap"><span class="ship-dot"></span></span>
+      <div class="ship-body">
+        <h3>全台快速出貨</h3>
+        <p>訂單成立後，全台均以 24 小時內為出貨目標。</p>
+      </div>
+    </div>
+    <div class="ship-item">
+      <span class="ship-time">2–3 天</span>
+      <span class="ship-dot-wrap"><span class="ship-dot"></span></span>
+      <div class="ship-body">
+        <h3>超商取貨</h3>
+        <p>選擇超商取貨，預計 2–3 個工作天可到店取件。</p>
+      </div>
+    </div>
+    <div class="ship-item">
+      <span class="ship-time">4–5 天</span>
+      <span class="ship-dot-wrap"><span class="ship-dot"></span></span>
+      <div class="ship-body">
+        <h3>離島地區</h3>
+        <p>離島地區配送時間稍長，預計 4–5 個工作天到貨，敬請耐心等候。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="after">
+  <div class="section-head reveal">
+    <h2>售後服務</h2>
+    <span class="section-num">04</span>
+  </div>
+  <div class="after-card reveal">
+    <h3 style="font-size:19px;">收到商品後有任何問題嗎？</h3>
+    <p>歡迎隨時與我們聯繫，我們會盡快協助您處理。若商品有瑕疵等情況需要退換貨，我們將依照「退換貨政策」為您服務，詳細規範請參考以下連結。</p>
+    <a class="after-link" href="https://link.williamspicks.com/return" target="_blank" rel="noopener">
+      查看退換貨政策
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head reveal">
+    <h2>聯繫方式</h2>
+    <span class="section-num">05</span>
+  </div>
+  <div class="contact-block reveal">
+    <p style="margin:0;color:var(--ink-soft);max-width:36ch;">有任何訂購、出貨或售後問題，歡迎直接來信，我們將盡快回覆您。</p>
+    <a class="mail" href="mailto:support@williamspicks.com">support@williamspicks.com</a>
+  </div>
+</section>
+
+<footer>
+  © Williams Picks. 感謝您的支持與訂購。<br>
+  Brighture Digital 旗下品牌 · <a href="https://tw.brighture-digital.wokers.dev" target="_blank" rel="noopener" style="text-decoration:underline;">tw.brighture-digital.wokers.dev</a>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
